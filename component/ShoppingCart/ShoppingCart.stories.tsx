@@ -1,5 +1,5 @@
-import {ShoppingCart} from "./ShoppingCart"
 import {ComponentStory, ComponentMeta} from "@storybook/react"
+import {ShoppingCart} from "./ShoppingCart"
 
 export default {
     component: ShoppingCart

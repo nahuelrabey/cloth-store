@@ -7,6 +7,8 @@ type args = { count?: number }
 
 export function ShoppingCart({ count = 0 }: args) {
     const isActive = count > 0
+
+    // NOTICE THAT ALL THIS LOGIC COULD BE IN A "CIRCLE" ELEMENT
     const textRef = React.createRef<HTMLSpanElement>()
     const imRef = React.createRef<HTMLImageElement>()
     const divRef = React.createRef<HTMLDivElement>()
@@ -16,7 +18,7 @@ export function ShoppingCart({ count = 0 }: args) {
             return
         }
 
-        const radius = imRef.current.offsetWidth * 0.65;
+        const radius = Math.max(imRef.current.offsetWidth * 0.65, 25);
         const textWidth = textRef.current.offsetWidth
 
         // padding to be set to the div containig span
