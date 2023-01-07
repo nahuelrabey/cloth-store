@@ -1,26 +1,37 @@
+:root {
+  --width: 75px
+}
+
 .cart {
   display: flex;
   justify-content: space-between;
+  width: var(--width);
+  /* height: 75px; */
+}
 
+.cart img {
+  width: 50%
 }
 
 .cart div {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #ffd56f;
-  padding: 0 1em;
-  border-radius: 50%;
 }
 
-.cart div span {
+.circle {
+  border-radius: 50%;
+  background-color: #ffd56f;
+}
+
+.circle span {
   display: block;
   color: white;
   text-align: center;
-  font-family: sans-serif;
+  font-family: serif;
   font-size: smaller;
-  /* line-height: 0; */
 }
+
 .active {
   background-color: #ff7b54;
 }
