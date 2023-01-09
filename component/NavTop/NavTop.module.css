@@ -1,0 +1,13 @@
+.navTop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.logo span {
+    font-weight: bolder;
+}

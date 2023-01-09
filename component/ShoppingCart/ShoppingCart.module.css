@@ -1,16 +1,11 @@
-:root {
-  --width: 65px
-}
-
 .cart {
   display: flex;
   justify-content: space-between;
-  width: var(--width);
-  /* height: 75px; */
+  width: 60px
 }
 
 .cart img {
-  width: 50%
+  width: 50%;
 }
 
 .cart div {
