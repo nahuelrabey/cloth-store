@@ -1,0 +1,22 @@
+.places {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+.places ul {
+  display: flex;
+  margin: 0;
+}
+.places ul li {
+  list-style: none;
+}
+.places ul li a {
+  display: inline-block;
+  padding: 0px 10px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.25s;
+}
+.places ul li a:hover {
+  opacity: .75;
+}

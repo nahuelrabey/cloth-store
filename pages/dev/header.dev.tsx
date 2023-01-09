@@ -1,5 +1,4 @@
-import NavTop from "../../component/NavTop";
-
-export default function Header(){
-    return (<NavTop/>)
+import Nav from "../../component/Nav"
+export default function Header() {
+    return (<Nav />)
 }
