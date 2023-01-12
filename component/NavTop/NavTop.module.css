@@ -1,6 +1,6 @@
-.navTop {
-    display: flex;
-    justify-content: space-between;
+.navTopDesktop {
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {
@@ -10,4 +10,17 @@
 }
 .logo span {
     font-weight: bolder;
+}
+
+.navTopMobile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hamburguer {
+    width: 35%;
+}
+
+.hamburguer img {
+    width: inherit;
 }
