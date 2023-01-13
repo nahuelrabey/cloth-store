@@ -5,7 +5,8 @@ import { Roboto_Slab } from "@next/font/google"
 import SearchBar from "../SearchBar"
 import Mobile from "../Mobile"
 import Desktop from "../Desktop"
-import Hamburguer from "../Hamburguer"
+import Hamburguer, { MenuContext } from "../MenuController"
+import { useContext } from "react"
 
 const slab = Roboto_Slab({ subsets: ['latin'] })
 
@@ -34,11 +35,14 @@ function NavPlacesDesktop(props: args) {
 }
 
 function NavPlacesMobile(props: args) {
-    return (
+    const { isActive } = useContext(MenuContext)
+
+
+    return isActive ? (
         <div className={styles.placesMobile}>
-            <Hamburguer/>
+            <Hamburguer />
             <SearchBar />
             <Items {...props} />
         </div>
-    )
+    ) : null
 }

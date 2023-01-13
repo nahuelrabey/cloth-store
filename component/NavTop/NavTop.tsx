@@ -2,7 +2,7 @@
 import { Inter } from "@next/font/google";
 import { useEffect, useState } from "react";
 import Desktop from "../Desktop";
-import Hamburguer from "../Hamburguer";
+import MenuController from "../MenuController";
 import Mobile from "../Mobile";
 import SearchBar from "../SearchBar";
 import ShoppingCart from "../ShoppingCart";
@@ -19,7 +19,7 @@ export function NavTop() {
 function NavTopMobile() {
     return (
         <div style={inter.style} className={styles.navTopMobile}>
-            <Hamburguer/>
+            <MenuController/>
             <div className={styles.logo}>
                 <span>TU LOGO</span>
             </div>
