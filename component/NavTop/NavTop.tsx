@@ -2,6 +2,7 @@
 import { Inter } from "@next/font/google";
 import { useEffect, useState } from "react";
 import Desktop from "../Desktop";
+import Hamburguer from "../Hamburguer";
 import Mobile from "../Mobile";
 import SearchBar from "../SearchBar";
 import ShoppingCart from "../ShoppingCart";
@@ -18,9 +19,7 @@ export function NavTop() {
 function NavTopMobile() {
     return (
         <div style={inter.style} className={styles.navTopMobile}>
-            <div className={styles.hamburguer}>
-                <img src="/menu.svg" alt="menu" />
-            </div>
+            <Hamburguer/>
             <div className={styles.logo}>
                 <span>TU LOGO</span>
             </div>

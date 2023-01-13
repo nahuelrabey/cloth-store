@@ -16,11 +16,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-.hamburguer {
-    width: 35%;
-}
-
-.hamburguer img {
-    width: inherit;
-}
