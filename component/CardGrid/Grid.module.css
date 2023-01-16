@@ -1,0 +1,6 @@
+.grid {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 100px auto;
+}
