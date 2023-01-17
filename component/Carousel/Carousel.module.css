@@ -1,0 +1,15 @@
+.Carousel {
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.Iterator{
+    width: fit-content;
+    white-space: nowrap;
+    transition: all 0.25s;
+    /* transform: translateX(20px); */
+}
+.Iterator>* {
+    display: inline-block;
+    /* margin: 0 10px; */
+}
