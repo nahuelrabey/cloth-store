@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Carousel.module.css";
 import { Item } from "./CarouselItem";
+import Image from "next/image"
 
 type args = { children: JSX.Element[] };
 const itemMargin = 10;
 export function Carousel({ children }: args) {
     /* ---------------------------- Items Controller ---------------------------- */
     // TODO: ¿Should this be an independent component?
-    const [refs, items] = useMemo(() => {
+    const [itemsRefs, items] = useMemo(() => {
         let key = 0;
         const items = [];
         const refs = [];
@@ -29,93 +30,102 @@ export function Carousel({ children }: args) {
     useEffect(() => {
         debugger;
         setItemsSpace(
-            refs.map((ref) =>
+            itemsRefs.map((ref) =>
                 ref.current ? ref.current.offsetWidth + itemMargin * 2 : 0
             )
         );
-    }, [refs]);
-    console.table(itemsSpace);
+    }, [itemsRefs]);
+    console.debug(itemsSpace);
 
-    const getItemSpace = useCallback((index:number)=>{
+    const getItemSpace = useCallback((index: number) => {
         return itemsSpace[index];
     }, [itemsSpace])
 
     // calculate max space
     const maxSpace = useMemo(() => Math.max(...itemsSpace), [itemsSpace]);
-    console.log(maxSpace);
 
 
 
     /* ---------------------------- Iterator Control ---------------------------- */
     // TODO: ¿Should this be an independent component?
+    const [iteratorWidth, setIteratorWidth] = useState(0)
+    const [carouselWidth, setCarousuelWidth] = useState(0)
     const [translateX, setTranslateX] = useState(0);
-    const [index, setIndex] = useState(0);
+    const itemIndex = useRef(0)
     const [distanceToWall, setDistance] = useState(0)
-    const [pathTraveled, setPathTraveled] = useState(0)
+    const [_, setPathTraveled] = useState(0)
     const iteratorRef = useRef<HTMLDivElement>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
 
-    // center Item
+    // center Item callback
     const centerItem = useCallback((itemSpace: number, carouselWidth: number) => {
-        debugger; 
-        console.log("translating...")
+        debugger;
+        console.debug("translating...")
         const whiteSpace = carouselWidth - itemSpace
-        setTranslateX(translateX + whiteSpace / 2)
+        console.debug("White space:", whiteSpace)
+        setTranslateX((tX) => whiteSpace > 0 ? tX + whiteSpace / 2 : tX)
         return whiteSpace / 2
     }, [])
 
     function onClickLeft() {
-        if (index <= 0) {
-            debugger;
+        debugger;
+        if (itemIndex.current <= 0) {
             return;
         }
-        setIndex(index - 1);
-        setTranslateX(translateX + getItemSpace(index));
-        // if we go left, we substract pathTraveled
-        setPathTraveled(pathTraveled - getItemSpace(index))
-        console.log("onLeft");
+        itemIndex.current -= 1
+        const nextItemSpace = getItemSpace(itemIndex.current)
+        setTranslateX(tx => tx + nextItemSpace);
+        setPathTraveled(pt => pt - nextItemSpace) // if we go left, we substract pathTraveled
+        console.debug("onLeft");
     }
 
     function onClickRight() {
         debugger;
-        if (index >= itemsSpace.length - 1 || distanceToWall <= 0) {
+        if (itemIndex.current >= itemsSpace.length - 1 || distanceToWall <= 0) {
             return;
         }
-        setIndex(index + 1);
-        setTranslateX(translateX - getItemSpace(index));
-        // if we go right, we add pathTraveled
-        setPathTraveled(pathTraveled + getItemSpace(index))
+        itemIndex.current += 1
+        const nextItemSpace = getItemSpace(itemIndex.current)
+        setTranslateX(tx => tx - nextItemSpace);
+        setPathTraveled(pt => pt + nextItemSpace) // if we go right, we add pathTraveled
+        console.debug("onRight");
     }
 
+    // run when iterator ref changes
     useEffect(() => {
-        const itemSpace = getItemSpace(index)
-        if (!iteratorRef.current || !carouselRef.current || !itemSpace || itemSpace == 0) {
+        if (!iteratorRef.current || !carouselRef.current) return;
+        setIteratorWidth(iteratorRef.current.offsetWidth)
+        setCarousuelWidth(carouselRef.current.offsetWidth)
+    }, [iteratorRef, carouselRef])
+
+    // center first item
+    useEffect(() => {
+        const itemSpace = getItemSpace(itemIndex.current)
+        if (!itemSpace || itemSpace == 0) {
             return
         }
-        const iteratorWidth = iteratorRef.current.offsetWidth
-        const carouselWidth = carouselRef.current.offsetWidth
-        
-        console.log("INDEX:", index)
-        console.log("INDEX SIZE:", getItemSpace(index))
-        debugger;
-        const centerTraveled = centerItem(itemSpace, carouselWidth)
-        setPathTraveled(pathTraveled + centerTraveled)
-        // distance to wall is calculated on each render ¿should i use a memo?
-        setDistance(iteratorWidth - carouselWidth - pathTraveled )
-        console.table({
-            iteratorWidth,
-            carouselWidth,
-            centerTraveled,
-            pathTraveled,
-            distanceToWall
-        });
-        console.log(index)
-    }, [centerItem, distanceToWall, getItemSpace, index, pathTraveled]);
 
-    debugger;
+        const centerTraveled = centerItem(itemSpace, carouselWidth)
+        setPathTraveled((pathTraveled) => {
+            const newPath = pathTraveled + centerTraveled
+            setDistance(iteratorWidth - carouselWidth - pathTraveled)
+            return newPath
+        })
+        // distance to wall is calculated on each render ¿should i use a memo?
+    }, [carouselWidth, centerItem, getItemSpace, iteratorWidth]);
+
+    console.debug({
+        itemIndex,
+        carouselWidth,
+        iteratorWidth,
+        translateX
+    })
+
     return (
         <div className={styles.wraper}>
-            <button onClick={()=>onClickLeft()}>Left</button>
+            <button onClick={() => onClickLeft()}>
+                <Image src="/left-arrow.svg" alt="left arrow icon" style={{ objectFit: "contain" }} width={20} height={20} />
+            </button>
             <div className={styles.Carousel} style={{ minWidth: `${maxSpace}px` }} ref={carouselRef}>
                 <div
                     className={styles.Iterator}
@@ -125,7 +135,9 @@ export function Carousel({ children }: args) {
                     {items}
                 </div>
             </div>
-            <button onClick={()=>onClickRight()}>Right</button>
+            <button onClick={() => onClickRight()}>
+                <Image src="/right-arrow.svg" alt="left arrow icon" style={{ objectFit: "contain" }} width={20} height={20} />
+            </button>
         </div>
     );
 }
