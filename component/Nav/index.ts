@@ -1,3 +1,3 @@
-import {Nav} from "./Nav"
+import * as Nav from "./Nav"
 
 export default Nav

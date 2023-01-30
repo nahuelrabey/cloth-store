@@ -1,22 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { Inter } from "@next/font/google";
 import { useEffect, useState } from "react";
-import Desktop from "../Desktop";
 import MenuController from "../MenuController";
-import Mobile from "../Mobile";
 import SearchBar from "../SearchBar";
 import ShoppingCart from "../ShoppingCart";
 import styles from "./NavTop.module.css"
 const inter = Inter({ subsets: ['latin'] })
 
-export function NavTop() {
-    return <>
-        <Mobile><NavTopMobile /></Mobile>
-        <Desktop><NavTopDesktop /></Desktop>
-    </>
-}
-
-function NavTopMobile() {
+export function Mobile() {
     return (
         <div style={inter.style} className={styles.navTopMobile}>
             <MenuController/>
@@ -27,7 +18,7 @@ function NavTopMobile() {
     )
 }
 
-function NavTopDesktop() {
+export function Desktop() {
     return (
         <div style={inter.style} className={styles.navTopDesktop}>
             <div className={styles.logo}>

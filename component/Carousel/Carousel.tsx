@@ -3,9 +3,9 @@ import styles from "./Carousel.module.css";
 import { Item } from "./CarouselItem";
 import Image from "next/image"
 
-type args = { children: JSX.Element[] };
+type args = { children: JSX.Element[], className?: string };
 const itemMargin = 10;
-export function Carousel({ children }: args) {
+export function Carousel({ children, className="" }: args) {
     /* ---------------------------- Items Controller ---------------------------- */
     // TODO: ¿Should this be an independent component?
     const [itemsRefs, items] = useMemo(() => {
@@ -35,7 +35,7 @@ export function Carousel({ children }: args) {
             )
         );
     }, [itemsRefs]);
-    console.debug(itemsSpace);
+    // console.debug(itemsSpace);
 
     const getItemSpace = useCallback((index: number) => {
         return itemsSpace[index];
@@ -114,15 +114,15 @@ export function Carousel({ children }: args) {
         // distance to wall is calculated on each render ¿should i use a memo?
     }, [carouselWidth, centerItem, getItemSpace, iteratorWidth]);
 
-    console.debug({
-        itemIndex,
-        carouselWidth,
-        iteratorWidth,
-        translateX
-    })
+    // console.debug({
+    //     itemIndex,
+    //     carouselWidth,
+    //     iteratorWidth,
+    //     translateX
+    // })
 
     return (
-        <div className={styles.wraper}>
+        <section className={`${styles.wraper} ${className}`}>
             <button onClick={() => onClickLeft()}>
                 <Image src="/left-arrow.svg" alt="left arrow icon" style={{ objectFit: "contain" }} width={20} height={20} />
             </button>
@@ -138,6 +138,6 @@ export function Carousel({ children }: args) {
             <button onClick={() => onClickRight()}>
                 <Image src="/right-arrow.svg" alt="left arrow icon" style={{ objectFit: "contain" }} width={20} height={20} />
             </button>
-        </div>
+        </section>
     );
 }

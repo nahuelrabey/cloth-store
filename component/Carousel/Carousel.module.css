@@ -19,6 +19,7 @@
   /* border: 1px solid black;
   border-radius: 10px; */
   width: 80%;
+  /* z-index:0;  */
 }
 .Iterator {
   width: fit-content;

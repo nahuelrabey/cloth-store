@@ -1,2 +1,1 @@
-import { NavTop } from "./NavTop";
-export default NavTop
+export * from "./NavTop";

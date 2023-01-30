@@ -3,25 +3,16 @@ import styles from "./NavPlaces.module.css"
 import Link from "next/link"
 import { Roboto_Slab } from "@next/font/google"
 import SearchBar from "../SearchBar"
-import Mobile from "../Mobile"
-import Desktop from "../Desktop"
 import Hamburguer, { MenuContext } from "../MenuController"
 import { useContext } from "react"
 
 const slab = Roboto_Slab({ subsets: ['latin'] })
 
-type place = [string, string]
-type args = { places: place[] }
+export type Place = [string, string]
+type args = { places: Place[] }
 
-export function NavPlaces() {
-    const places: place[] = [["COLECCIÓN SS'23", "#"], ["LÍNEAS", "#"], ["REBAJAS", "#"], ["CONTACTO", "#"]]
-    return (<>
-        <Mobile><NavPlacesMobile places={places} /></Mobile>
-        <Desktop><NavPlacesDesktop places={places} /></Desktop>
-    </>)
-}
 
-type argsItems = { places: place[] }
+type argsItems = { places: Place[] }
 function Items({ places }: argsItems) {
     const items = places.map(([text, place], index) =>
         <li key={index}><Link href={place}>{text}</Link></li>
@@ -30,11 +21,11 @@ function Items({ places }: argsItems) {
 }
 
 
-function NavPlacesDesktop(props: args) {
+export function Desktop(props: args) {
     return <div className={styles.placesDesktop}><Items {...props} /></div>
 }
 
-function NavPlacesMobile(props: args) {
+export function Mobile(props: args) {
     const { isActive } = useContext(MenuContext)
 
 

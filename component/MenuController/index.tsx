@@ -9,8 +9,8 @@ export default function Hamburguer() {
     const [width, setWidth] = useState(0)
 
     useEffect(() => {
-        setWidth(window.innerWidth * 0.15)
-        console.log("Width:", width)
+        setWidth(window.innerWidth * 0.08)
+        // console.log("Width:", width)
     }, [width])
 
     // eslint-disable-next-line @next/next/no-img-element
