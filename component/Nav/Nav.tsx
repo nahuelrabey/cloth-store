@@ -10,7 +10,7 @@ export function Desktop({places}:params) {
     const [isMobileMenuActive, setMobileMenuActive] = useState(false)
     const toggle = () => { setMobileMenuActive(!isMobileMenuActive) } // if true, set false, if false, set true
     return (
-        <nav>
+        <nav style={{padding: "10px"}}>
             <MenuContext.Provider value={{ isActive: isMobileMenuActive, toggle}}>
                 <NavTop.Desktop />
                 <NavPlaces.Desktop places={places}/>

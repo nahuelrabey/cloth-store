@@ -1,0 +1,60 @@
+.desktop:root {
+  --width: 100;
+  --height: 30;
+}
+
+.desktop {
+  width: 98vw;
+  height: 30vw;
+  margin: auto;
+}
+
+.link {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1.5em;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s;
+}
+
+.link:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.box-1 {
+  margin-right: 2vw;
+}
+
+.box-1,
+.wrap_1 {
+  width: 47vw; 
+  height: 100%;
+  float: left;
+}
+
+.box-2 {
+  height: 14vw;
+  width: 100%;
+}
+
+.wrap_2 {
+  height: 14vw;
+  width: 100%;
+  margin-top: 2vw;
+}
+
+.box-3 {
+  margin-right: 2vw;
+}
+
+.box-3,
+.box-4 {
+  height: 100%;
+  width: 22.5vw;
+  float: left;
+}

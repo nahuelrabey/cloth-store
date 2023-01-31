@@ -5,9 +5,13 @@ import Nav from "../component/Nav";
 import type { Place } from "../component/NavPlaces/NavPlaces";
 import ShowCase from "../component/Showcase";
 import styles from "../styles/Home.module.css";
+import { Inter } from "@next/font/google";
+import Sections from "../component/Sections";
 
-type params = { data: ICard[], places: Place[] };
-export default function Home({ data, places }: params) {
+const inter = Inter({ subsets: ["latin"] });
+
+type params = { data: ICard[]; places: Place[]; sections: Sections.ISection[] };
+export default function Home({ data, places, sections }: params) {
   return (
     <>
       <Head>
@@ -16,9 +20,10 @@ export default function Home({ data, places }: params) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className={styles.main}>
+      <main style={inter.style} className={styles.main}>
         <Nav.Desktop places={places} />
         <ShowCase.Desktop data={data} />
+        <Sections.Desktop sections={sections}/>
       </main>
     </>
   );
@@ -53,7 +58,34 @@ export const getStaticProps: GetStaticProps<params> = (context) => {
           title: "Camisa Top",
         },
       ],
-      places: [["COLECCIÓN SS'23", "#"], ["LÍNEAS", "#"], ["REBAJAS", "#"], ["CONTACTO", "#"]]
+      places: [
+        ["COLECCIÓN SS'23", "#"],
+        ["LÍNEAS", "#"],
+        ["REBAJAS", "#"],
+        ["CONTACTO", "#"],
+      ],
+      sections: [
+        {
+          image: "/scarf.jpg",
+          name: "scarf",
+          url: "#",
+        },
+        {
+          image: "/scarf.jpg",
+          name: "scarf",
+          url: "#",
+        },
+        {
+          image: "/scarf.jpg",
+          name: "scarf",
+          url: "#",
+        },
+        {
+          image: "/scarf.jpg",
+          name: "scarf",
+          url: "#",
+        },
+      ],
     }, // will be passed to the page component as props
   };
 };
