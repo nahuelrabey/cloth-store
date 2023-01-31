@@ -58,3 +58,12 @@
   width: 22.5vw;
   float: left;
 }
+
+.mobile{
+  margin: 15vh 0;
+}
+.mobile div {
+  height: 30vh;
+  width: 90vw;
+  margin: 6vh auto;
+}

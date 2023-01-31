@@ -7,6 +7,7 @@ import ShowCase from "../component/Showcase";
 import styles from "../styles/Home.module.css";
 import { Inter } from "@next/font/google";
 import Sections from "../component/Sections";
+import Newsletter from "../component/Newsletter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function Home({ data, places, sections }: params) {
         <Nav.Desktop places={places} />
         <ShowCase.Desktop data={data} />
         <Sections.Desktop sections={sections}/>
+        <Newsletter/>
       </main>
     </>
   );

@@ -23,7 +23,7 @@ export function Mobile({places}:params){
     const [isMobileMenuActive, setMobileMenuActive] = useState(false)
     const toggle = () => { setMobileMenuActive(!isMobileMenuActive) } // if true, set false, if false, set true
     return (
-        <nav>
+        <nav style={{padding: "2vw"}}>
             <MenuContext.Provider value={{ isActive: isMobileMenuActive, toggle}}>
                 <NavTop.Mobile />
                 <NavPlaces.Mobile places={places}/>

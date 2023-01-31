@@ -35,3 +35,23 @@ export function Desktop({ sections }: params) {
     </section>
   );
 }
+
+export function Mobile({sections}:params){
+  validateSection(sections)
+  const boxes = sections.map(({ image, name, url }, index) => (
+    <div
+      key={index}
+      style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}
+    >
+      <a href={url} className={style.link}>
+        <span>{name.toUpperCase()}</span>
+      </a>
+    </div>
+  ));
+
+  return (
+    <section className={style.mobile}>
+      {boxes}
+    </section>
+  )
+}

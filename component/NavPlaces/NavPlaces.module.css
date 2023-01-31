@@ -45,7 +45,7 @@
   position: absolute;
   width: 100%;
   /* top: 0; */
-  top: 8px;
+  top: 2vw;
   background-color: white;
   z-index: 1;
   /* display: none; */
